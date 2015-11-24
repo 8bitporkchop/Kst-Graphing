@@ -12,6 +12,7 @@ class Graphing(Client):
 		self.list_of_variables = {}
 		self.list_of_curves = []
 
+		#sets up a clean screen
 		self.clear()
 
 	def new_source(self,tag,file_location):
@@ -80,8 +81,8 @@ class Graphing(Client):
 
 k = Graphing()
 
-k.new_source('file1',"C:/Users/Asaf/Desktop/Python/Work/Graphing/Testing/Test.csv")
-k.new_source('file2',"C:/Users/Asaf/Desktop/Python/Work/Graphing/Testing/test7.csv")
+k.new_source('file1',"C:/Users/Asaf/Desktop/Python/Work/Graphing/Kst-Graphing/Test1.csv")
+k.new_source('file2',"C:/Users/Asaf/Desktop/Python/Work/Graphing/Kst-Graphing/Test2.csv")
 
 k.new_variable("Column 1",'file1','file1x', name = 'TimeStamp')
 k.new_variable("Column 2",'file1','file1y',name = 'Time (Milliseconds/10)')
