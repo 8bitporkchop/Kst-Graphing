@@ -1,11 +1,13 @@
 import pykst as kst
-
 from pykst import Client
 
 class Graphing(Client):
 	def __init__(self):
 		#Initates class with pykst library
-		Client.__init__(self)
+		try:
+			Client.__init__(self)
+		except WindowsError:
+			raise Exception('Make sure KST is running.')
 
 		#These libraries will hold all variables and curves to plot later
 		self.list_of_sources = {}
@@ -61,6 +63,11 @@ class Graphing(Client):
 		#adds curve to library
 		self.list_of_curves.append( temp_curve )
 
+	def show_single_plot(self,name):
+		plot = self.new_plot()
+		plot.set_x_no_spike()
+		plot.add(self.list_of_curves[name])
+
 	def show_all_plots_together(self):
 		#shows all curves on a single graph
 		plot = self.new_plot()
@@ -74,15 +81,13 @@ class Graphing(Client):
 			plot = self.new_plot()
 			plot.set_x_no_spike()
 			plot.add(i)
-	def show_single_plot(self,name):
-		plot = self.new_plot()
-		plot.set_x_no_spike()
-		plot.add(self.list_of_curves[name])
+
 
 k = Graphing()
 
 k.new_source('file1',"C:/Users/Asaf/Desktop/Python/Work/Graphing/Kst-Graphing/Test1.csv")
 k.new_source('file2',"C:/Users/Asaf/Desktop/Python/Work/Graphing/Kst-Graphing/Test2.csv")
+#k.new_source('file3',"C:/Users/Asaf/Desktop/Python/Work/Graphing/Kst-Graphing/Test3.csv")
 
 k.new_variable("Column 1",'file1','file1x', name = 'TimeStamp')
 k.new_variable("Column 2",'file1','file1y',name = 'Time (Milliseconds/10)')
@@ -90,7 +95,11 @@ k.new_variable("Column 2",'file1','file1y',name = 'Time (Milliseconds/10)')
 k.new_variable("Column 1",'file2','file2x', name = 'TimeStamp')
 k.new_variable("Column 2",'file2','file2y', name = 'Time (Milliseconds/10)')
 
+#k.new_variable("Column 1",'file3','file3x', name = 'TimeStamp')
+#k.new_variable("Column 2",'file3','file3y', name = 'Time (Milliseconds/10)')
+
 k.create_curve( k.list_of_variables['file1x'] , k.list_of_variables['file1y'] )
 k.create_curve( k.list_of_variables['file2x'] , k.list_of_variables['file2y'] ,colour = 'red')
+#k.create_curve( k.list_of_variables['file3x'] , k.list_of_variables['file3y'] ,colour = 'green')
 
 k.show_all_plots_alone()

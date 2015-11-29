@@ -6,7 +6,7 @@ for i in range(5):
 	timee = int(round(random.randint(1000,6000),2))
 
 	click = True
-	with open("test.csv","r+") as CSV:
+	with open("Test1.csv","r+") as CSV:
 		lastline=len(CSV.readlines()) -1
 		CSV.seek(0)
 		for i,line in enumerate(CSV):
